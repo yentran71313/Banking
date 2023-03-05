@@ -24,6 +24,13 @@ public class TransfersController {
     @GetMapping("/transfer/history")
     private String showHistory(Model model){
         List<Transfers> transfers = transfersService.findAll();
+        BigDecimal total = BigDecimal.ZERO;
+        for (Transfers t: transfers
+             ) {
+            total = total.add(t.getFeesAmount()
+            );
+        }
+        model.addAttribute("total", total);
         model.addAttribute("transfers",transfers);
         return "transfer-history";
     }
