@@ -1,0 +1,41 @@
+.background-title{
+    width: 100%;
+    background-color: #299be4;
+    padding: 20px 40px;
+}
+.title{
+    font-size: 20pt;
+    color: white;
+    font-weight: bold;
+}
+label{
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+.btn-title{
+    border-color: white; 
+    color: white;
+}
+button{
+    padding: 1%;
+}
+.btn-list{
+    font-size: 10pt;
+}
+.create-customer:hover{
+    background-color: #299be4;
+    color: white !important;
+    font-weight: bolder;
+}
+.deposit{
+    font-weight: bolder;
+}
+.deposit:hover{
+    background-color: green;
+    color: white !important;
+}
+.suspension:hover{
+    background-color: red;
+    color: white !important;
+}

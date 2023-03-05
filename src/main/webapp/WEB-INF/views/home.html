@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="layout/head::head"></head>
+<body>
+    <div class="container">
+        <!-- --------------------------------------------TITLE 2------------------------------------------- -->
+        <div class="container-fluid background-title">
+            <div class="row">
+                <div class="col-6 title" style="font-size: 30pt;">List of customer</div>
+                <div class="col-6">
+                    <a href="/transfer/history" class="btn btn-outline-info col-5 btn-title">
+                        <i class="fa fa-list" aria-hidden="true"></i> Tranfer money information
+                    </a>
+                    <a href="/customer/create-customer" class="btn btn-outline-info col-5 btn-title">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i> Add New Customer
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- --------------------------------------------TITLE 2------------------------------------------- -->    
+          <table class="table" style="font-size: 11pt; vertical-align: middle;">
+            <thead class="thead-light bg-success">
+              <tr>
+                <th scope="col" class="text-light" style="text-align: center;">#</th>
+                <th scope="col" class="text-light" style="text-align: center;">FullName</th>
+                <th scope="col" class="text-light" style="text-align: center;">Email</th>
+                <th scope="col" class="text-light" style="text-align: center;">Phone</th>
+                <th scope="col" class="text-light" style="text-align: center;">Address</th>
+                <th scope="col" class="text-light" style="text-align: center;" width="10%">Balance</th>
+                <th scope="col" class="text-light" style="text-align: center;" width="21%">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="padding-top: 10px; padding-bottom: 10px;" th:each="customer:${customers}">
+                <th scope="row" th:text="${customer.id}"></th>
+                <td th:text="${customer.fullName}"></td>
+                <td th:text="${customer.email}"></td>
+                <td th:text="${customer.phone}"></td>
+                <td th:text="${customer.address}"></td>
+                <td style="text-align: center;" th:text="${customer.balance}"></td>
+                <td class="row">
+                    <a th:href="@{/customer/edit/__${customer.getId()}__}" type="button" class="btn btn-outline-dark col-2 mx-1 my-1 btn-list"><i class="fas fa-edit"></i></a>
+                    <a th:href="@{/deposit/__${customer.getId()}__}" class="btn btn-outline-success col-2 m-1 btn-list"><i class="fas fa-plus"></i></a>
+                    <a th:href="@{/withdraw/__${customer.getId()}__}" class="btn btn-outline-warning col-2 m-1 btn-list"><i class="fas fa-minus"></i></a>
+                    <a th:href="@{/transfer/__${customer.getId()}__}"  class="btn btn-outline-info col-2 m-1 btn-list"><i class="fa-solid fa-arrow-right-arrow-left"></i></a>
+                    <a th:href="@{/customer/suspension/__${customer.getId()}__}" class="btn btn-outline-danger col-2 m-1 btn-list"><i class="fa-sharp fa-solid fa-ban"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    
+</body>
+</html>

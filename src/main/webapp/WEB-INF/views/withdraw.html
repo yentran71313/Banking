@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="layout/head::head"></head>
+<body>
+    <div class="container">
+<!-- --------------------------------------------TITLE 1------------------------------------------- -->
+        <div class="container-fluid background-title">
+            <div class="row">
+                <div class="col-10 title">Withdraw</div>
+                <a href="/customer" class="btn btn-outline-info col-2 btn-title">
+                   <i class="fa fa-list" aria-hidden="true"></i> Customer List
+                </a>
+            </div>
+        </div>
+        <th:block th:switch="${message}">
+            <script th:case="'success'">
+                Swal.fire(
+                    'Rút tiền thành công!',
+                    'You clicked the button!',
+                    'success'
+                )
+            </script>
+            <script th:case="'Khong du tien'">
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Số tiền trong tài khoản đủ để thực hiện giao dịch',
+                    text: '',
+                    footer: ''
+                })
+            </script>
+        </th:block>
+<!-- --------------------------------------------TITLE 1------------------------------------------- -->
+        <form th:action="@{'/withdraw/'+${withdraws.customer.id}}" method="post" th:object="${withdraws}">
+            <div class="row">
+                <div class="col-6">
+                    <label>Customer ID</label>
+                    <br>
+                    <input class="form-control" th:field="*{customer.id}" disabled>
+                </div>
+                <div class="col-6">
+                    <label>Full name</label>
+                    <br>
+                    <input class="form-control" th:field="*{customer.fullName}" disabled>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label>Current Balance</label>
+                    <br>
+                    <input class="form-control" th:field="*{customer.balance}" disabled>
+                </div>
+                <div class="col-6" th:object="${withdraws}">
+                    <label>Transaction amount</label>
+                    <br>
+                    <input class="form-control" th:field="*{transactionAmount}">
+                </div>
+            </div>
+            <br>
+            <div class="col-5">
+                <button type="submit" class="btn btn-outline-warning col-4">
+                   <i class="fas fa-credit-card"></i> Withdraw
+                </button>
+            </div>
+        </form>
+        <script>
+            let input = document.getElementsByTagName("input");
+            let regex = /^[1-9]([0-9]){0,11}$/;
+            let inputMoney = document.getElementById("transactionAmount").value;
+            function checkRegex(){
+                let inputMoney = document.getElementById("transactionAmount").value;
+                return regex.exec(inputMoney);
+            }
+            document.querySelector("form").addEventListener("submit", (e)=>{
+                console.log(checkRegex())
+                for(let i=0; i<input.length; i++){
+                    if(input[i].value=="" || input[i].value==null) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Số tiền rút không được để trống',
+                            text: '',
+                            footer: ''
+                        })
+                        e.preventDefault();
+                        return;
+                    }
+                }
+                if(checkRegex()===null){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Số tiền rút không đúng định dạng',
+                        text: 'Số tiền rút phải là số',
+                        footer: 'Số tiền rút nằm trong khoảng 0 - 999999999999'
+                    })
+                    e.preventDefault();
+                }
+            })
+        </script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="layout/head::head"></head>
+<body>
+<div class="container">
+    <!-- --------------------------------------------TITLE 1------------------------------------------- -->
+    <div class="container-fluid background-title">
+        <div class="row">
+            <div class="col-10 title">Edit Customer</div>
+            <a href="/customer" class="btn btn-outline-info col-2 btn-title">
+                <i class="fa fa-list" aria-hidden="true"></i> Customer List
+            </a>
+        </div>
+    </div>
+    <script th:if="${message != null}">
+        Swal.fire(
+            'Create Customer Success!',
+            'You clicked the button!',
+            'success'
+        )
+    </script>
+    <div style="display: none" id="error" th:text="${message}"></div>
+    <script th:if="${error != null}">
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: document.querySelector("#error").textContent,
+            footer: '<a href="">Why do I have this issue?</a>'
+        })
+    </script>
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
+    </script>
+    <!-- --------------------------------------------TITLE 1------------------------------------------- -->
+    <form th:action="@{'/customer/edit/'+${customer.getId()}}" method="post" th:object="${customer}">
+        <div class="row">
+            <div class="col-6">
+                <label>Full name</label>
+                <br>
+                <input class="form-control" th:field="*{fullName}">
+                <span class="error-fullName error"></span>
+            </div>
+            <div class="col-6">
+                <label>Email</label>
+                <br>
+                <input class="form-control" th:field="*{email}" placeholder="Ex: trung1234567@gmail.com">
+                <span class="error-email error"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label>Phone</label>
+                <br>
+                <input class="form-control" th:field="*{phone}" placeholder="Ex: 0123456789">
+                <span class="error-phone error"></span>
+            </div>
+            <div class="col-6">
+                <label>Address</label>
+                <br>
+                <input class="form-control" th:field="*{address}">
+                <span class="error-address error"></span>
+            </div>
+        </div>
+        <br>
+        <div class="col-6">
+            <button type="submit" class="btn btn-outline-info col-4 btn-title create-customer" style="color: #299be4; border-color: #299be4;">
+                <i class="fa fa-plus" aria-hidden="true"></i> Edit Customer
+            </button>
+        </div>
+    </form>
+    <script src="../../script/checkRegex.js"></script>
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:insert="layout/head::head"></head>
+<body>
+<div class="container">
+  <!-- --------------------------------------------TITLE 2------------------------------------------- -->
+  <div class="container-fluid background-title">
+    <div class="row">
+      <div class="col-6 title" style="font-size: 30pt;">History Transfers</div>
+      <div class="col-2"></div>
+      <div class="col-4">
+
+        <a href="/customer" class="btn btn-outline-info col-5 btn-title">
+          <i class="fa fa-plus-square" aria-hidden="true"></i> List Customer
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- --------------------------------------------TITLE 2------------------------------------------- -->
+  <table class="table" style="font-size: 11pt; vertical-align: middle;">
+    <thead class="thead-light bg-success">
+    <tr>
+      <th scope="col" class="text-light" style="text-align: center;">#</th>
+      <th scope="col" class="text-light" style="text-align: center;">ID</th>
+      <th scope="col" class="text-light" style="text-align: center;">Tên người gửi</th>
+      <th scope="col" class="text-light" style="text-align: center;">Số điện thoại</th>
+      <th scope="col" class="text-light" style="text-align: center;">ID</th>
+      <th scope="col" class="text-light" style="text-align: center;">Tên người nhận</th>
+      <th scope="col" class="text-light" style="text-align: center;">Số điện thoại</th>
+      <th scope="col" class="text-light" style="text-align: center;" width="10%">Số tiền chuyển khoản</th>
+      <th scope="col" class="text-light" style="text-align: center;" width="21%">Thời gian</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr style="padding-top: 10px; padding-bottom: 10px;" th:each="transfer:${transfers}">
+      <th scope="row" th:text="${transfer.id}"></th>
+      <td th:text="${transfer.sender.id}"></td>
+      <td th:text="${transfer.sender.fullName}"></td>
+      <td th:text="${transfer.sender.phone}"></td>
+      <td th:text="${transfer.recipient.id}"></td>
+      <td th:text="${transfer.recipient.fullName}"></td>
+      <td th:text="${transfer.recipient.phone}"></td>
+      <td th:text="${transfer.transferAmount}"></td>
+      <td th:text="${transfer.createdAt}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>
